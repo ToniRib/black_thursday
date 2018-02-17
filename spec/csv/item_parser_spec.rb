@@ -32,5 +32,13 @@ module Csv
       expect(items[2].created_at).to eq DateTime.parse('2016-01-11 11:30:35 UTC')
       expect(items[2].updated_at).to eq DateTime.parse('1986-12-21 16:16:32 UTC')
     end
+
+    it 'adds merchant_id to Items' do
+      items = described_class.parse(filename)
+
+      expect(items[0].merchant_id).to eq 12334235
+      expect(items[1].merchant_id).to eq 12335128
+      expect(items[2].merchant_id).to eq 12334195
+    end
   end
 end
