@@ -33,4 +33,16 @@ describe Item do
   it 'has a updated_at date' do
     expect(subject.updated_at).to eq time
   end
+
+  describe 'adding a merchant' do
+    it 'has a nil merchant_id by default' do
+      expect(subject.merchant_id).to be_nil
+    end
+
+    it 'can have a merchant_id added' do
+      subject.merchant_id = 5
+
+      expect(subject.merchant_id).to eq 5
+    end
+  end
 end
