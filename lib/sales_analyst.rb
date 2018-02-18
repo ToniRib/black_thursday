@@ -4,18 +4,14 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    item_counts = sales_engine.merchants.all.map do |merchant|
-      merchant.items.count
-    end
-
-    mean(item_counts)
+    mean(sales_engine.items_per_merchant.values)
   end
 
   private
   attr_reader :sales_engine
 
   def sum(numbers)
-    numbers.inject(0.0) { |result, el| result + el }
+    numbers.inject(0.0) { |result, number| result + number }
   end
 
   def mean(numbers)

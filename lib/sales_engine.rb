@@ -23,4 +23,10 @@ class SalesEngine
     @merchants = merchant_repo
     @items = item_repo
   end
+
+  def items_per_merchant
+    merchants.all.map do |merchant|
+      [merchant.id.to_s, merchant.items.count]
+    end.to_h
+  end
 end

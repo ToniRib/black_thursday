@@ -2,16 +2,16 @@ require 'spec_helper'
 require './lib/sales_engine'
 
 describe SalesEngine do
+  let(:csv_files) do
+    {
+      items: './spec/data/items.csv',
+      merchants: './spec/data/merchants.csv',
+    }
+  end
+
+  subject { described_class.from_csv(csv_files) }
+
   describe '.from_csv' do
-    let(:csv_files) do
-      {
-        items: './spec/data/items.csv',
-        merchants: './spec/data/merchants.csv',
-      }
-    end
-
-    subject { described_class.from_csv(csv_files) }
-
     it 'creates a new SalesEngine instance' do
       expect(subject).to be_an_instance_of(SalesEngine)
     end
@@ -36,6 +36,16 @@ describe SalesEngine do
       it 'create association between items and merchant' do
         expect(subject.items.all.first.merchant.name).to eq 'Shopin1901'
       end
+    end
+  end
+
+  describe '#items_per_merchant' do
+    it 'returns counts of items by merchant' do
+      expect(subject.items_per_merchant).to eq({
+        '12334113' => 0,
+        '12334112' => 1,
+        '12334105' => 2,
+      })
     end
   end
 end
