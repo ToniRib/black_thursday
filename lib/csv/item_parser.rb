@@ -10,7 +10,7 @@ module Csv
           id: row[:id].to_i,
           name: row[:name],
           description: row[:description],
-          unit_price: BigDecimal.new(row[:unit_price].to_i, 4),
+          unit_price: BigDecimal.new(row[:unit_price].to_i, 4) / 100,
           created_at: Time.parse(row[:created_at]),
           updated_at: Time.parse(row[:updated_at]),
         }).tap do |item|
