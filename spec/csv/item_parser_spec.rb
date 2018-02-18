@@ -40,9 +40,9 @@ module Csv
       it 'adds merchant_id to Items' do
         items = described_class.parse(filename)
 
-        expect(items[0].merchant_id).to eq 12334235
-        expect(items[1].merchant_id).to eq 12335128
-        expect(items[2].merchant_id).to eq 12334195
+        expect(items[0].merchant_id).to eq 12334105
+        expect(items[1].merchant_id).to eq 12334105
+        expect(items[2].merchant_id).to eq 12334112
       end
     end
   end

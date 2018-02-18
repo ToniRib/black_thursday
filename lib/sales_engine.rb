@@ -8,7 +8,18 @@ class SalesEngine
     merchants = Csv::MerchantParser.parse(csv_files[:merchants])
     items = Csv::ItemParser.parse(csv_files[:items])
 
-    new(MerchantRepository.new(merchants), ItemRepository.new(items))
+    merchant_repo = MerchantRepository.new(merchants)
+    item_repo = ItemRepository.new(items)
+
+    merchants.each do |merchant|
+      merchant.items = item_repo.find_all_by_merchant_id(merchant.id)
+    end
+
+    items.each do |item|
+      item.merchant = merchant_repo.find_by_id(item.merchant_id)
+    end
+
+    new(merchant_repo, item_repo)
   end
 
   attr_reader :merchants, :items

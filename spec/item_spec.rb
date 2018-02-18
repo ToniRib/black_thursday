@@ -1,5 +1,6 @@
 require 'spec_helper'
 require './lib/item'
+require './lib/merchant'
 
 describe Item do
   let(:time) { Time.now }
@@ -44,10 +45,22 @@ describe Item do
       expect(subject.merchant_id).to be_nil
     end
 
+    it 'has a nil merchant by default' do
+      expect(subject.merchant).to be_nil
+    end
+
     it 'can have a merchant_id added' do
       subject.merchant_id = 5
 
       expect(subject.merchant_id).to eq 5
+    end
+
+    it 'can have a merchant added' do
+      merchant = Merchant.new(id: 1, name: 'Target')
+
+      subject.merchant = merchant
+
+      expect(subject.merchant).to eq merchant
     end
   end
 end

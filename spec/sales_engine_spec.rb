@@ -10,24 +10,32 @@ describe SalesEngine do
       }
     end
 
+    subject { described_class.from_csv(csv_files) }
+
     it 'creates a new SalesEngine instance' do
-      expect(described_class.from_csv(csv_files)).to be_an_instance_of(SalesEngine)
+      expect(subject).to be_an_instance_of(SalesEngine)
     end
 
     it 'loads the associated merchant repository with Merchants from the file' do
-      sales_engine = described_class.from_csv(csv_files)
-
-      expect(sales_engine.merchants.class).to eq MerchantRepository
-      expect(sales_engine.merchants.all.length).to eq 3
-      expect(sales_engine.merchants.all.first.class).to eq Merchant
+      expect(subject.merchants.class).to eq MerchantRepository
+      expect(subject.merchants.all.length).to eq 3
+      expect(subject.merchants.all.first.class).to eq Merchant
     end
 
     it 'loads the associated item repository with Items from the file' do
-      sales_engine = described_class.from_csv(csv_files)
+      expect(subject.items.class).to eq ItemRepository
+      expect(subject.items.all.length).to eq 3
+      expect(subject.items.all.first.class).to eq Item
+    end
 
-      expect(sales_engine.items.class).to eq ItemRepository
-      expect(sales_engine.items.all.length).to eq 3
-      expect(sales_engine.items.all.first.class).to eq Item
+    describe 'associations' do
+      it 'create association between merchant and items' do
+        expect(subject.merchants.all.first.items.length).to eq 2
+      end
+
+      it 'create association between items and merchant' do
+        expect(subject.items.all.first.merchant.name).to eq 'Shopin1901'
+      end
     end
   end
 end
