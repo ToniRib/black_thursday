@@ -27,4 +27,17 @@ describe Merchant do
       expect(subject.items).to contain_exactly scarf, bandana
     end
   end
+
+  describe '#average_item_price' do
+    before do
+      scarf = Item.new({ id: 1, unit_price: BigDecimal.new(10.00, 4) })
+      bandana = Item.new({ id: 2, unit_price: BigDecimal.new(12.00, 4) })
+
+      subject.items = [scarf, bandana]
+    end
+
+    it 'returns the average price of associated items' do
+      expect(subject.average_item_price).to eq BigDecimal(11.00, 4)
+    end
+  end
 end

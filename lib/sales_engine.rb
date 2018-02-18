@@ -27,4 +27,8 @@ class SalesEngine
   def items_per_merchant
     merchants.items_per_merchant
   end
+
+  def find_merchant_by_id(id)
+    merchants.find_by_id(id)
+  end
 end
