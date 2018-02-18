@@ -1,5 +1,6 @@
 require 'spec_helper'
 require './lib/merchant_repository'
+require './lib/merchant'
 
 describe MerchantRepository do
   let(:merchants) do
