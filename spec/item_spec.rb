@@ -6,12 +6,17 @@ describe Item do
 
   subject do
     described_class.new(
+      id: 1,
       name: 'Pencil',
       description: 'You can use it to write things',
       unit_price: BigDecimal.new(10.99, 4),
       created_at: time,
       updated_at: time,
     )
+  end
+
+  it 'has an id' do
+    expect(subject.id).to eq 1
   end
 
   it 'has a name' do

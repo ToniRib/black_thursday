@@ -6,6 +6,7 @@ module Csv
     def self.parse(filename)
       CSV.open(filename, { headers: true, header_converters: :symbol }).map do |row|
         Item.new({
+          id: row[:id].to_i,
           name: row[:name],
           description: row[:description],
           unit_price: BigDecimal.new(row[:unit_price].to_i, 4),
