@@ -2,6 +2,7 @@ require_relative 'merchant_repository'
 require_relative 'item_repository'
 require_relative 'csv/merchant_parser'
 require_relative 'csv/item_parser'
+require_relative 'relationships'
 
 class SalesEngine
   def self.from_csv(csv_files)
@@ -11,13 +12,7 @@ class SalesEngine
     merchant_repo = MerchantRepository.new(merchants)
     item_repo = ItemRepository.new(items)
 
-    merchants.each do |merchant|
-      merchant.items = item_repo.find_all_by_merchant_id(merchant.id)
-    end
-
-    items.each do |item|
-      item.merchant = merchant_repo.find_by_id(item.merchant_id)
-    end
+    Relationships.new.build!(merchant_repo, item_repo)
 
     new(merchant_repo, item_repo)
   end
