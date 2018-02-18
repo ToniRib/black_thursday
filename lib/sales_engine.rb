@@ -1,7 +1,7 @@
-require './lib/merchant_repository'
-require './lib/item_repository'
-require './lib/csv/merchant_parser'
-require './lib/csv/item_parser'
+require_relative 'merchant_repository'
+require_relative 'item_repository'
+require_relative 'csv/merchant_parser'
+require_relative 'csv/item_parser'
 
 class SalesEngine
   def self.from_csv(csv_files)
