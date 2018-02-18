@@ -23,6 +23,10 @@ class MerchantRepository
     "#<#{self.class} #{merchants.size} rows>"
   end
 
+  def items_per_merchant
+    all.map { |merchant| [merchant.id.to_s, merchant.items.count] }.to_h
+  end
+
   private
   attr_reader :merchants
 end

@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/merchant_repository'
 require './lib/merchant'
+require './lib/item'
 
 describe MerchantRepository do
   let(:merchants) do
@@ -77,6 +78,20 @@ describe MerchantRepository do
       it 'an empty array' do
         expect(subject.find_all_by_name('bananas')).to be_empty
       end
+    end
+  end
+
+  describe '#items_per_merchant' do
+    before do
+      merchants[0].items = [Item.new, Item.new]
+      merchants[1].items = [Item.new, Item.new, Item.new]
+    end
+
+    it 'returns counts of items by merchant' do
+      expect(subject.items_per_merchant).to eq({
+        merchants[0].id.to_s => 2,
+        merchants[1].id.to_s => 3,
+      })
     end
   end
 end

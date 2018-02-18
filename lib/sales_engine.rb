@@ -25,8 +25,6 @@ class SalesEngine
   end
 
   def items_per_merchant
-    merchants.all.map do |merchant|
-      [merchant.id.to_s, merchant.items.count]
-    end.to_h
+    merchants.items_per_merchant
   end
 end
