@@ -1,0 +1,1 @@
+One way of completing Turing School's Mod 1 Black Thursday project. Avoids passing `self` through from Sales Engine downwards, making each piece easy to initialize and test. Also allows for reuse of the lower level classes anywhere since they have no knowledge of how they are being used.
