@@ -25,12 +25,11 @@ describe SalesAnalyst do
       Item.new(id: 7, name: 'Necklace').tap { |item| item.merchant_id = merchants[2].id },
     ]
   end
-  let(:sales_engine) do
-    SalesEngine.new(
-      merchant_repo: MerchantRepository.new(merchants),
-      item_repo: ItemRepository.new(items),
-    )
-  end
+  let(:merchant_repo) { MerchantRepository.new(merchants) }
+  let(:item_repo) { ItemRepository.new(items) }
+  let(:sales_engine) { SalesEngine.new(merchant_repo: merchant_repo, item_repo: item_repo) }
+
+  before { Relationships.new.build!(merchant_repo, item_repo) }
 
   subject { described_class.new(sales_engine) }
 
