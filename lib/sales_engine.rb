@@ -12,14 +12,14 @@ class SalesEngine
     merchant_repo = MerchantRepository.new(merchants)
     item_repo = ItemRepository.new(items)
 
-    new(merchant_repo: merchant_repo, item_repo: item_repo)
+    Relationships.new.build!(merchant_repo, item_repo)
+
+    new(merchant_repo, item_repo)
   end
 
   attr_reader :merchants, :items
 
-  def initialize(merchant_repo:, item_repo:)
-    Relationships.new.build!(merchant_repo, item_repo)
-
+  def initialize(merchant_repo, item_repo)
     @merchants = merchant_repo
     @items = item_repo
   end
