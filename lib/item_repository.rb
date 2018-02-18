@@ -31,6 +31,10 @@ class ItemRepository
     items.select { |item| item.merchant_id == merchant_id }
   end
 
+  def inspect
+    "#<#{self.class} #{items.size} rows>"
+  end
+
   private
   attr_reader :items
 end

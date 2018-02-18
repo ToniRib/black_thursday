@@ -19,6 +19,10 @@ class MerchantRepository
     merchants.select { |merchant| merchant.name.downcase.include?(name.downcase) }
   end
 
+  def inspect
+    "#<#{self.class} #{merchants.size} rows>"
+  end
+
   private
   attr_reader :merchants
 end
